@@ -85,12 +85,12 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
     <div
       className="stock-card shadow-md overflow-hidden flex flex-col"
       style={{
-        height: '300px',
-        width: '300px',
+        height: '400px', // Increased height
+        width: '250px',  // Same width
         backgroundColor: '#191a1c', // Set background color
         border: 'none', // Remove border
         borderRadius: '0px', // Remove rounded corners (if desired)
-        padding: '20px',
+        padding: '20px', // Adjusted padding
       }}
     >
       <div className="mb-2">
@@ -106,7 +106,7 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
         <table
           className="table-auto border-collapse"
           style={{
-            width: '100%', // Make table fill the container
+            width: '100%', // Full width for table
           }}
         >
           <thead>
@@ -116,7 +116,7 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
                   padding: '5px',
                   backgroundColor: '#333',
                   color: 'white',
-                  borderRadius: '4px', // Reduced border radius
+                  borderRadius: '5px', // Reduced curvature
                 }}
               >
                 Company
@@ -126,7 +126,7 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
                   padding: '5px',
                   backgroundColor: '#333',
                   color: 'white',
-                  borderRadius: '4px', // Reduced border radius
+                  borderRadius: '5px', // Reduced curvature
                 }}
               >
                 Price
@@ -138,20 +138,20 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
               <tr key={company.id}>
                 <td
                   style={{
-                    padding: '8px',
+                    padding: '5px', // Adjusted padding
                     backgroundColor: '#333',
                     color: 'white',
-                    borderRadius: '4px', // Reduced border radius
+                    borderRadius: '5px', // Reduced curvature
                   }}
                 >
                   {company.name}
                 </td>
                 <td
                   style={{
-                    padding: '8px',
+                    padding: '5px', // Adjusted padding
                     backgroundColor: '#333',
                     color: 'white',
-                    borderRadius: '4px', // Reduced border radius
+                    borderRadius: '5px', // Reduced curvature
                   }}
                 >
                   ${company.price}
@@ -166,15 +166,15 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
         style={{
           display: 'flex',
           justifyContent: 'center',
-          gap: '30px',
-          marginTop: '5px',
+          gap: '20px', // Adjusted gap between buttons
+          marginTop: '10px', // Adjusted margin
         }}
       >
         <button
           style={{
             backgroundColor: '#4CAF50',
             color: 'white',
-            padding: '8px 20px',
+            padding: '8px 15px', // Adjusted padding for buttons
             border: 'none',
             borderRadius: '5px',
             cursor: 'pointer',
@@ -191,7 +191,7 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
           style={{
             backgroundColor: '#F44336',
             color: 'white',
-            padding: '8px 20px',
+            padding: '8px 15px', // Adjusted padding for buttons
             border: 'none',
             borderRadius: '5px',
             cursor: 'pointer',
