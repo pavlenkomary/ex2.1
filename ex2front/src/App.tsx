@@ -10,7 +10,7 @@ const App: React.FC = () => {
       <div>
         {/* Header with navigation */}
         <nav style={{
-            backgroundColor: '#1E1E2F', // Change to your preferred background color
+            backgroundColor: '#191a1c', // Change to your preferred background color
             padding: '1rem',
             width: '100%', // Ensure the header spans the full width
             position: 'fixed', // Optional: keeps the header fixed at the top
@@ -26,17 +26,17 @@ const App: React.FC = () => {
             margin: 0,
             padding: 0,
             fontSize: "1.5rem", // Larger font size
-            color: '#FFFFFF', // Change text color if needed,
+            color: '#d4d5d6', // Change text color if needed,
             left:0
           }}>
             <li>
-              <Link to="/spot">Spot</Link>
+              <Link to="/spot">spot</Link>
             </li>
             <li>
-              <Link to="/futures">Futures</Link>
+              <Link to="/futures">futures</Link>
             </li>
             <li>
-              <Link to="/your-compute">Your Compute</Link>
+              <Link to="/your-compute">your compute</Link>
             </li>
           </ul>
         </nav>

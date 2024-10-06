@@ -20,10 +20,7 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
     { time: Date.now() - 86400000, value: 50 }, // Example data for chart
   ];
 
-  // State for chart data
   const [chartData, setChartData] = useState(initialData);
-  
-  // State for tech companies
   const [techCompanies, setTechCompanies] = useState<TechCompany[]>([
     { id: 1, name: 'Apple', price: 150 },
     { id: 2, name: 'Google', price: 150 },
@@ -31,7 +28,6 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
     { id: 4, name: 'Amazon', price: 150 },
   ]);
 
-  // Effect to add a random value every second for chart data
   useEffect(() => {
     const interval = setInterval(() => {
       const lastEntry = chartData[chartData.length - 1];
@@ -39,157 +35,172 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
       const newValue = lastEntry.value + randomChange; // Update value
       const newTime = Date.now(); // Get current timestamp
       setChartData((prevData) => {
-        // Create a new entry
         const newData = [...prevData, { time: newTime, value: newValue }];
-        // Sort the data by time
         newData.sort((a, b) => a.time - b.time);
-        return newData; // Return the sorted data
+        return newData;
       });
-    }, 1000); // Tick every second
-
-    return () => clearInterval(interval); // Cleanup on unmount
+    }, 1000);
+    return () => clearInterval(interval);
   }, [chartData]);
 
-  // Effect to update tech company prices every second
   useEffect(() => {
     const priceInterval = setInterval(() => {
       setTechCompanies((prevCompanies) =>
         prevCompanies.map((company) => ({
           ...company,
-          price: parseFloat((company.price + (Math.random() > 0.5 ? 1 : -1)).toFixed(2)), // Random price change
+          price: parseFloat(
+            (company.price + (Math.random() > 0.5 ? 1 : -1)).toFixed(2)
+          ),
         }))
       );
-    }, 1000); // Update prices every second
-
-    return () => clearInterval(priceInterval); // Cleanup on unmount
+    }, 1000);
+    return () => clearInterval(priceInterval);
   }, []);
 
-  // Function to handle buy
   const handleBuy = () => {
     const lastValue = chartData[chartData.length - 1].value;
-    const newValue = lastValue + 2; // Increase by 2 for buy
-    const newTime = Date.now(); // Get current timestamp
+    const newValue = lastValue + 2; 
+    const newTime = Date.now();
     setChartData((prevData) => [
       ...prevData,
       { time: newTime, value: newValue },
     ]);
-    onBuy(); // Call the provided onBuy function
+    onBuy();
   };
 
-  // Function to handle sell
   const handleSell = () => {
     const lastValue = chartData[chartData.length - 1].value;
-    const newValue = lastValue - 2; // Decrease by 2 for sell
-    const newTime = Date.now(); // Get current timestamp
+    const newValue = lastValue - 2; 
+    const newTime = Date.now();
     setChartData((prevData) => [
       ...prevData,
       { time: newTime, value: newValue },
     ]);
-    onSell(); // Call the provided onSell function
+    onSell();
   };
 
-  // Get the latest price from the chart data
-  const latestPrice = chartData[chartData.length - 1].value; // Last value in the data array
+  const latestPrice = chartData[chartData.length - 1].value; 
 
   return (
-    <div 
-      className="stock-card border p-2 rounded-lg shadow-md overflow-hidden flex flex-col"
+    <div
+      className="stock-card shadow-md overflow-hidden flex flex-col"
       style={{
-        height: '300', // Adjust height
-        width: '300px',  // Adjust width
-      }}>
-      
-      <div className="mb-2"> {/* Removed text-center */}
-        <h2 className="text-lg font-bold">{name}</h2>
+        height: '300px',
+        width: '300px',
+        backgroundColor: '#191a1c', // Set background color
+        border: 'none', // Remove border
+        borderRadius: '0px', // Remove rounded corners (if desired)
+        padding: '20px',
+      }}
+    >
+      <div className="mb-2">
+        <h2 className="text-lg font-bold text-white">{name}</h2>
         <p className="text-gray-400 text-sm">Price: ${price.toFixed(2)}</p>
       </div>
 
-      {/* Chart Component with Borders */}
+      <p className="text-gray-100 font-semibold mb-2 text-sm text-center">
+        Latest Price: ${latestPrice.toFixed(2)}
+      </p>
 
-      {/* Display the latest price below the chart */}
-      <p className="text-gray-100 font-semibold mb-2 text-sm text-center">Latest Price: ${latestPrice.toFixed(2)}</p>
-
-      {/* Tech Companies Table */}
-      <div className="w-full flex justify-center"> {/* Center the table */}
-        <table 
-          className="table-auto border-collapse" // Removed text-center
+      <div className="w-full flex justify-center">
+        <table
+          className="table-auto border-collapse"
           style={{
-            width: '50%', // Full width
-          }}>
+            width: '100%', // Make table fill the container
+          }}
+        >
           <thead>
             <tr>
-              <th 
+              <th
                 style={{
-                  padding: '5px', // Padding for header
-                  backgroundColor: '#333', // Dark gray background
-                  color: 'white', // White text for contrast
-                  borderRadius: '10px', // Rounded corners
-                }}>Company</th>
-              <th 
+                  padding: '5px',
+                  backgroundColor: '#333',
+                  color: 'white',
+                  borderRadius: '4px', // Reduced border radius
+                }}
+              >
+                Company
+              </th>
+              <th
                 style={{
-                  padding: '5px', // Padding for header
-                  backgroundColor: '#333', // Dark gray background
-                  color: 'white', // White text for contrast
-                  borderRadius: '10px', // Rounded corners
-                }}>Price</th>
+                  padding: '5px',
+                  backgroundColor: '#333',
+                  color: 'white',
+                  borderRadius: '4px', // Reduced border radius
+                }}
+              >
+                Price
+              </th>
             </tr>
           </thead>
           <tbody>
             {techCompanies.map((company) => (
-              <tr key={company.id}> {/* Use the unique id as the key */}
-                <td 
+              <tr key={company.id}>
+                <td
                   style={{
-                    padding: '8px', // Padding for cells
-                    backgroundColor: '#333', // Dark gray background for cells
-                    color: 'white', // White text for contrast
-                    borderRadius: '10px', // Rounded corners for cells
-                  }}>{company.name}</td>
-                <td 
+                    padding: '8px',
+                    backgroundColor: '#333',
+                    color: 'white',
+                    borderRadius: '4px', // Reduced border radius
+                  }}
+                >
+                  {company.name}
+                </td>
+                <td
                   style={{
-                    padding: '8px', // Padding for cells
-                    backgroundColor: '#333', // Dark gray background for cells
-                    color: 'white', // White text for contrast
-                    borderRadius: '10px', // Rounded corners for cells
-                  }}>${company.price}</td>
+                    padding: '8px',
+                    backgroundColor: '#333',
+                    color: 'white',
+                    borderRadius: '4px', // Reduced border radius
+                  }}
+                >
+                  ${company.price}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
 
-      {/* Buy and Sell buttons */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '30px', marginTop: '5px' }}> {/* Keep buttons centered */}
-        <button 
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '30px',
+          marginTop: '5px',
+        }}
+      >
+        <button
           style={{
-            backgroundColor: '#4CAF50', // Softer green
+            backgroundColor: '#4CAF50',
             color: 'white',
-            padding: '8px 20px', // Reduced padding
+            padding: '8px 20px',
             border: 'none',
             borderRadius: '5px',
             cursor: 'pointer',
             transition: 'background-color 0.3s',
-            fontSize: '0.9rem' // Smaller font size
-          }} 
+            fontSize: '0.9rem',
+          }}
           onClick={handleBuy}
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#66BB6A'} // Lighter green on hover
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#4CAF50'} // Reset to original color
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#66BB6A')}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#4CAF50')}
         >
           Buy
         </button>
-        <button 
+        <button
           style={{
-            backgroundColor: '#F44336', // Softer red
+            backgroundColor: '#F44336',
             color: 'white',
-            padding: '8px 20px', // Reduced padding
+            padding: '8px 20px',
             border: 'none',
             borderRadius: '5px',
             cursor: 'pointer',
             transition: 'background-color 0.3s',
-            fontSize: '0.9rem' // Smaller font size
-          }} 
+            fontSize: '0.9rem',
+          }}
           onClick={handleSell}
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#EF5350'} // Lighter red on hover
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#F44336'} // Reset to original color
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#EF5350')}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#F44336')}
         >
           Sell
         </button>

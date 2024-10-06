@@ -68,17 +68,17 @@ const MapComponent: React.FC = () => {
     {
       id: 1,
       name: "Vessel 1",
-      coordinates: [-74.0060152, 40.7127281],
+      coordinates: [-51.5185, 0.0859],
       path: [],
     },
-    { id: 2, name: "Vessel 2", coordinates: [-74.1, 40.8], path: [] },
-    { id: 3, name: "Vessel 3", coordinates: [-73.9, 40.6], path: [] },
-    { id: 4, name: "Vessel 4", coordinates: [-73.5, 40.4], path: [] },
+    { id: 2, name: "Vessel 2", coordinates: [-51.5185, 0.0859], path: [] },
+    // { id: 3, name: "Vessel 3", coordinates: [-73.9, 40.6], path: [] },
+    // { id: 4, name: "Vessel 4", coordinates: [-73.5, 40.4], path: [] },
   ];
 
   const generateRandomPoints = (numPoints: number) => {
     const points = [];
-    const bounds = [-74.2, 40.3, -73.7, 41]; // Bounding box (minLon, minLat, maxLon, maxLat)
+    const bounds = [-54, 0.1, -73.7, 41]; // Bounding box (minLon, minLat, maxLon, maxLat)
 
     // Generate random points for red circles
     for (let i = 0; i < numPoints; i++) {
@@ -131,7 +131,7 @@ const MapComponent: React.FC = () => {
       const map = new mapboxgl.Map({
         container: mapContainer.current,
         style: "mapbox://styles/mapbox/dark-v11",
-        center: [-74.0060152, 40.7127281],
+        center: [-5.5, -13.1],
         zoom: 5,
         maxZoom: 15,
       });

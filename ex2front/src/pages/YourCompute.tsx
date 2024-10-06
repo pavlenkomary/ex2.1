@@ -15,7 +15,7 @@ const MyCompute: React.FC = () => {
         margin: 0, // Remove default margin
       }}
     >
-      <h1 style={{ marginBottom: '20px', textAlign: 'center' }}>Data Center Availability</h1> {/* Centered text */}
+      <h1 style={{ marginBottom: '20px', textAlign: 'left' }}>Data Center Availability</h1> {/* Centered text */}
       <div style={{ height: '500px', width: '100%', maxWidth: '800px' }}> {/* Container for the map */}
         <MapComponent />
       </div>

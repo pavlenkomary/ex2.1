@@ -42,7 +42,7 @@ const Spot: React.FC = () => {
 
   return (
     <div className="App">
-      <h1 className="text-3xl font-bold">Stock Page</h1>
+      <h1 className="text-m font-bold" style={{ marginTop: '0px' }}>Purchase compute</h1>
 
       {/* Stock List */}
       <StockList stocks={stocks} onBuy={handleBuy} onSell={handleSell} />

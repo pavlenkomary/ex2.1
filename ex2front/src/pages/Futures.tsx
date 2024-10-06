@@ -26,7 +26,7 @@ const Futures: React.FC = () => {
       <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>
           <div>
-            <h1>Futures Trading</h1>
+            <h1 className="text-3xl font-bold" style={{ marginTop: '85px' }}>Futures</h1>
             <WalletMultiButton />
             <ChartComponent />
             <InfoBox />
