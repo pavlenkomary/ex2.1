@@ -1,53 +1,55 @@
-import { useMemo } from "react";
-import {
-  ConnectionProvider,
-  WalletProvider,
-} from "@solana/wallet-adapter-react";
-import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
-import {
-  WalletModalProvider,
-  WalletMultiButton,
-} from "@solana/wallet-adapter-react-ui";
-import { clusterApiUrl } from "@solana/web3.js";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import Futures from "./pages/Futures"; // Updated path to Futures page
+import Spot from "./pages/Spot"; // Updated path
+import YourCompute from "./pages/YourCompute"; // Updated path
 import "./App.css";
 
- 
-// Default styles that can be overridden by your app
-import "@solana/wallet-adapter-react-ui/styles.css";
-import BuyLongButton from "./components/buy-long-button";
-import ChartComponent from "./components/fut-chart";
-import InfoBox from "./components/fut-info";
- 
-function App() {
-  // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
-  const network = WalletAdapterNetwork.Devnet;
-  // You can also provide a custom RPC endpoint.
-  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
- 
-  const wallets = useMemo(
-    () => [
-      // if desired, manually define specific/custom wallets here (normally not required)
-      // otherwise, the wallet-adapter will auto detect the wallets a user's browser has available
-    ],
-    [network],
-  );
- 
+const App: React.FC = () => {
   return (
-    <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider wallets={wallets} autoConnect>
-        <WalletModalProvider>
-          <WalletMultiButton />
-          {/* <h1>Hello Solana</h1> */}
-          <h1>GPUZ4</h1>
-          <ChartComponent />
+    <Router>
+      <div>
+        {/* Header with navigation */}
+        <nav style={{
+            backgroundColor: '#1E1E2F', // Change to your preferred background color
+            padding: '1rem',
+            width: '100%', // Ensure the header spans the full width
+            position: 'fixed', // Optional: keeps the header fixed at the top
+            top: 0, // Optional: aligns the header to the top
+            zIndex: 1000, // Optional: ensures the header stays above other content
+            left:0
+          }}>
+          <ul style={{
+            display: "flex",
+            justifyContent: "space-around", // Equally spread out items
+            alignItems: "center", // Center items vertically
+            listStyle: "none",
+            margin: 0,
+            padding: 0,
+            fontSize: "1.5rem", // Larger font size
+            color: '#FFFFFF', // Change text color if needed,
+            left:0
+          }}>
+            <li>
+              <Link to="/spot">Spot</Link>
+            </li>
+            <li>
+              <Link to="/futures">Futures</Link>
+            </li>
+            <li>
+              <Link to="/your-compute">Your Compute</Link>
+            </li>
+          </ul>
+        </nav>
 
-          
-      
-        </WalletModalProvider>
-      </WalletProvider>
-      <InfoBox />
-    </ConnectionProvider>
+        {/* Routes */}
+        <Routes>
+          <Route path="/spot" element={<Spot />} />
+          <Route path="/futures" element={<Futures />} />
+          <Route path="/your-compute" element={<YourCompute />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
- 
+};
+
 export default App;
