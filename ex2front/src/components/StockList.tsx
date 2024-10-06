@@ -18,7 +18,7 @@ const StockList: React.FC<StockListProps> = ({ stocks, onBuy, onSell }) => {
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)', // Fit 4 cards horizontally
+        gridTemplateColumns: 'repeat(4, 3fr)', // Fit 4 cards horizontally
         gap: '16px', // Space between cards
         padding: '10px', // Padding around the grid
       }}

@@ -61,7 +61,7 @@ interface VesselFeature
 
 const MapComponent: React.FC = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
-  const blackCircleRadius = 10; // Initial radius for the blue circle
+  const blackCircleRadius = 20; // Initial radius for the blue circle
   const edgeThickness = 4; // Thickness for the white edge
 
   const vessels: Vessel[] = [
@@ -78,7 +78,7 @@ const MapComponent: React.FC = () => {
 
   const generateRandomPoints = (numPoints: number) => {
     const points = [];
-    const bounds = [-54, 0.1, -73.7, 41]; // Bounding box (minLon, minLat, maxLon, maxLat)
+    const bounds = [-72, 45, -73.7, 41]; // Bounding box (minLon, minLat, maxLon, maxLat)
 
     // Generate random points for red circles
     for (let i = 0; i < numPoints; i++) {
@@ -131,7 +131,7 @@ const MapComponent: React.FC = () => {
       const map = new mapboxgl.Map({
         container: mapContainer.current,
         style: "mapbox://styles/mapbox/dark-v11",
-        center: [-5.5, -13.1],
+        center: [-73.9, 40.6],
         zoom: 5,
         maxZoom: 15,
       });
@@ -301,7 +301,7 @@ const MapComponent: React.FC = () => {
   return (
     <div
       ref={mapContainer}
-      style={{ position: "absolute", top: 250,left:0, bottom: 10, width: "100%", height:"70%" }}
+      style={{ position: "absolute", top: 500,left:0, bottom: 10, width: "100%", height:"70%" }}
     />
   );
 };

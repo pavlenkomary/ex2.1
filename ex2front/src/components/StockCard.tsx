@@ -9,7 +9,7 @@ interface TechCompany {
 
 interface StockCardProps {
   name: string;
-  price: number;
+  price: number; // This price will be used for the latest price
   onBuy: () => void;
   onSell: () => void;
 }
@@ -22,10 +22,10 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
 
   const [chartData, setChartData] = useState(initialData);
   const [techCompanies, setTechCompanies] = useState<TechCompany[]>([
-    { id: 1, name: 'Apple', price: 150 },
-    { id: 2, name: 'Google', price: 150 },
-    { id: 3, name: 'Microsoft', price: 150 },
-    { id: 4, name: 'Amazon', price: 150 },
+    { id: 1, name: 'RTX 4090', price: 1600 },
+    { id: 2, name: 'RX 7900 XTX', price: 1000 },
+    { id: 3, name: 'RTX 4080', price: 1200 },
+    { id: 4, name: 'RX 6800 XT', price: 800 },
   ]);
 
   useEffect(() => {
@@ -81,11 +81,17 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
 
   const latestPrice = chartData[chartData.length - 1].value; 
 
+  // Sort companies by price from lowest to highest
+  const sortedCompanies = [...techCompanies].sort((a, b) => a.price - b.price);
+
+  // Get the lowest price from the sorted list
+  const lowestPrice = sortedCompanies.length > 0 ? sortedCompanies[0].price : 0;
+
   return (
     <div
       className="stock-card shadow-md overflow-hidden flex flex-col"
       style={{
-        height: '400px', // Increased height
+        height: '380px', // Decreased height
         width: '250px',  // Same width
         backgroundColor: '#191a1c', // Set background color
         border: 'none', // Remove border
@@ -95,12 +101,26 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
     >
       <div className="mb-2">
         <h2 className="text-lg font-bold text-white">{name}</h2>
-        <p className="text-gray-400 text-sm">Price: ${price.toFixed(2)}</p>
       </div>
 
-      <p className="text-gray-100 font-semibold mb-2 text-sm text-center">
-        Latest Price: ${latestPrice.toFixed(2)}
-      </p>
+        {/* Price Container */}
+        <div 
+        className="price-container" 
+        style={{
+            backgroundColor: '#333', // Match table cell background
+            color: 'white',
+            padding: '2px 0', // Decreased padding to reduce height (top/bottom padding only)
+            textAlign: 'center',
+            borderRadius: '5px',
+            flexGrow: 1, // Make this container fill available space
+            fontSize: '1rem', // Decreased font size to further reduce height
+            fontWeight: 'bold', // Make text bold
+        }}
+        >
+        <p className="text-gray-400">Price: {lowestPrice.toFixed(2)}</p> {/* Display lowest price */}
+        </div>
+
+
 
       <div className="w-full flex justify-center">
         <table
@@ -113,13 +133,14 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
             <tr>
               <th
                 style={{
-                  padding: '5px',
+                  padding: '3px',
                   backgroundColor: '#333',
                   color: 'white',
                   borderRadius: '5px', // Reduced curvature
+                  width: '120px', // Static width for GPU names
                 }}
               >
-                Company
+                GPU
               </th>
               <th
                 style={{
@@ -127,6 +148,7 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
                   backgroundColor: '#333',
                   color: 'white',
                   borderRadius: '5px', // Reduced curvature
+                  width: '80px', // Static width for prices
                 }}
               >
                 Price
@@ -134,7 +156,7 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
             </tr>
           </thead>
           <tbody>
-            {techCompanies.map((company) => (
+            {sortedCompanies.map((company) => (
               <tr key={company.id}>
                 <td
                   style={{
@@ -142,6 +164,7 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
                     backgroundColor: '#333',
                     color: 'white',
                     borderRadius: '5px', // Reduced curvature
+                    width: '120px', // Static width for GPU names
                   }}
                 >
                   {company.name}
@@ -152,9 +175,10 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
                     backgroundColor: '#333',
                     color: 'white',
                     borderRadius: '5px', // Reduced curvature
+                    width: '80px', // Static width for prices
                   }}
                 >
-                  ${company.price}
+                  {company.price.toFixed(2)}
                 </td>
               </tr>
             ))}
@@ -210,3 +234,6 @@ const StockCard: React.FC<StockCardProps> = ({ name, price, onBuy, onSell }) => 
 };
 
 export default StockCard;
+
+
+

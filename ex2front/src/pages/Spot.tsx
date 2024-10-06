@@ -28,6 +28,10 @@ const Spot: React.FC = () => {
     { id: 2, name: 'GPU', price: 675.50 },
     { id: 3, name: 'CPU', price: 3456.78 },
     { id: 4, name: 'DATA', price: 3456.78 },
+    { id: 1, name: 'FPGA', price: 145.23 },
+    { id: 2, name: 'GPU', price: 675.50 },
+    { id: 3, name: 'CPU', price: 3456.78 },
+    { id: 4, name: 'DATA', price: 3456.78 },
   ]);
 
   const handleBuy = (id: number) => {
@@ -42,8 +46,13 @@ const Spot: React.FC = () => {
 
   return (
     <div className="App">
-      <h1 className="text-m font-bold" style={{ marginTop: '0px' }}>Purchase compute</h1>
-
+     <h1 style={{ 
+        margin: '100px 0 20px 0', // Added top margin for buffer and adjusted bottom margin
+        fontSize: '36px', // Decreased font size
+        textAlign: 'left' // Ensure the text is aligned left
+      }}>
+        Purhase compute 
+      </h1>
       {/* Stock List */}
       <StockList stocks={stocks} onBuy={handleBuy} onSell={handleSell} />
 
